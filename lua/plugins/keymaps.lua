@@ -50,6 +50,21 @@ return {
         { "<leader>n", function () Snacks.notifier.show_history() end, desc = "Notification history", },
       }
     end,
+    opts = {
+      styles = {
+        terminal = {
+          keys = {
+            term_normal_q = {
+              "<c-q>",
+              function () vim.cmd("stopinsert") end,
+              mode = "t",
+              expr = true,
+              desc = "escape to normal mode",
+            },
+          }
+        }
+      }
+    }
   },
 
   {
@@ -132,11 +147,4 @@ return {
       }
     end,
   },
-
-  {
-    "folke/sidekick.nvim",
-    keys = {
-      { "<c-?>", function() require("sidekick.cli").toggle() end, desc = "Sidekick Toggle CLI" }
-    }
-  }
 }

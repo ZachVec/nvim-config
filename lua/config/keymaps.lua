@@ -162,5 +162,3 @@ vim.keymap.set("n", "<leader>;i", function()
     end
   end)
 end, { desc = "Indentation" })
-
-vim.keymap.set({ "n", "i", "v" }, "<Esc>[46;5u", "<C-.>", { remap = true })
