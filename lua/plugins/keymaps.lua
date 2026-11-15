@@ -15,7 +15,7 @@ return {
     -- stylua: ignore
     keys = function()
       return {
-        { "<leader>;p", "<cmd>YankyRingHistory<cr>", desc = "Yank History", mode = { "n", "x" } },
+        { "<leader>lp", "<cmd>YankyRingHistory<cr>", desc = "Yank History", mode = { "n", "x" } },
       }
     end,
   },
@@ -45,7 +45,7 @@ return {
     keys = function()
     -- stylua: ignore
       return {
-        { "<leader>;n", function() Snacks.picker.icons() end, desc = "Icons", },
+        { "<leader>ln", function() Snacks.picker.icons() end, desc = "Icons", },
         { "<leader>ef", function() Snacks.explorer({ cwd = LazyVim.root() }) end, desc = "File explorer", },
         { "<leader>n", function () Snacks.notifier.show_history() end, desc = "Notification history", },
       }
@@ -89,7 +89,7 @@ return {
         { "<leader><space>", "<cmd>FzfLua resume<cr>", desc = "Resume" },
         { "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
         { "<leader>ff", LazyVim.pick("files"), desc = "Find Files" },
-        { "<leader>fg", "<cmd>FzfLua git_files<cr>", desc = "Find Git Files" },
+        { "<leader>fg", "<cmd>FzfLua git_status<cr>", desc = "Find Git Status" },
         { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
         -- { "<leader>fs", function () require("fzf-lua").lsp_document_symbols( { regex_filter = symbols_filter } ) end, desc = "Goto Symbol" },
         { "<leader>fS", function () require("fzf-lua").lsp_live_workspace_symbols({ regex_filter = symbols_filter }) end, desc = "Symbols (Workspace)" },
@@ -97,9 +97,9 @@ return {
         { "<leader>fm", "<cmd>FzfLua marks<cr>", desc = "Bookmarks" },
         { "<leader>fh", "<cmd>FzfLua help_tags<cr>", desc = "Help Pages" },
         { "<leader>fH", "<cmd>FzfLua man_pages<cr>", desc = "Man Pages" },
-        { '<leader>;"', "<cmd>FzfLua registers<cr>", desc = "Registers" },
-        { "<leader>;k", "<cmd>FzfLua keymaps<cr>", desc = "KeyMaps" },
-        { "<leader>;c", LazyVim.pick("colorschemes"), desc = "Colorscheme" },
+        { '<leader>l"', "<cmd>FzfLua registers<cr>", desc = "Registers" },
+        { "<leader>lk", "<cmd>FzfLua keymaps<cr>", desc = "KeyMaps" },
+        { "<leader>lc", LazyVim.pick("colorschemes"), desc = "Colorscheme" },
         { "<leader>//", "<cmd>FzfLua grep_curbuf<cr>", desc = "Current Buffer" },
         { "<leader>/b", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
         { "<leader>/f", LazyVim.pick("live_grep"), desc = "Grep Files" },
@@ -133,7 +133,7 @@ return {
     -- stylua: ignore
     keys = function()
       return {
-        { "<leader>;v", "<cmd>:VenvSelect<cr>", desc = "Select virtual venv", ft = "python", },
+        { "<leader>lv", "<cmd>:VenvSelect<cr>", desc = "Select virtual venv", ft = "python", },
       }
     end,
   },

@@ -11,7 +11,7 @@ return {
         globalstatus = vim.o.laststatus == 3,
         disabled_filetypes = {
           winbar = { "snacks_dashboard", "snacks_picker_input", "snacks_picker_list", "snacks_layout_box", "aerial", "sidekick_terminal" },
-          statusline = { "snacks_dashboard", "aerial", "lazy" },
+          statusline = { "snacks_dashboard", "aerial", "lazy", "fzf", "snacks_picker_input", "snacks_picker_list", "snacks_layout_box", "terminal", "" },
         },
       }
 
@@ -43,7 +43,10 @@ return {
       }
       -- stylua: ignore end
 
-      opts.extensions = { "neo-tree", "lazy", "fzf" }
+      local quickfix = vim.deepcopy(require("lualine.extensions.quickfix"))
+      quickfix.winbar = { lualine_c = quickfix.sections.lualine_b }
+      quickfix.inactive_winbar = quickfix.winbar
+      opts.extensions = { "neo-tree", "lazy", "fzf", quickfix }
       return opts
     end,
   },

@@ -23,43 +23,39 @@ return {
   },
 
   {
-    "folke/sidekick.nvim",
+    "ZachVec/aviary.nvim",
+    main = "aviary",
     opts = {
-      nes = { enabled = false },
-      cli = {
-        mux = {
-          enabled = true,
-          backend = "tmux",
-        },
-        win = {
-          layout = "float",
-          float = { width = 1.0, height = 1.0 },
-          keys = {
-            -- buffers       = { "<M-b>", "buffers"   , mode = "nt", desc = "open buffer picker" },
-            -- files         = { "<M-f>", "files"     , mode = "nt", desc = "open file picker" },
-            -- hide_ctrl_q   = { "<M-q>", "hide"      , mode = "n" , desc = "hide the terminal window" },
-            -- prompt        = { "<M-p>", "prompt"    , mode = "t" , desc = "insert prompt or context" },
-            -- stopinsert    = { "<M-q>", "stopinsert", mode = "t" , desc = "enter normal mode" },
-            -- hide_cli      = { "<c-?>", "hide", mode="nt", desc="hide the terminal window" }
-          },
-        },
+      weaver = {
+        picker = "snacks",
         prompts = {
-          changes = "审查一下我的修改吗？",
-          diagnostics = "帮我修复 {file} 中的诊断信息吗？\n{diagnostics}",
-          diagnostics_all = "帮我修复以下诊断信息吗？\n{diagnostics_all}",
-          document = "在 {position} 处添加文档说明",
-          explain = "解释 {this}",
-          fix = "修复 {this} 吗？",
-          optimize = "如何优化 {this}？",
-          review = "审查一下 {file}，看看是否存在任何问题或改进点",
-          tests = "为 {this} 编写测试",
+          ["{file}"] = "{file} ",
+          ["{line}"] = "{line} "
+        }
+      },
+      pigeon = {
+        backend = {
+          default = "tmux",
+          tmux = {
+            width = "100%",
+            height = "100%",
+          },
         },
         tools = {
-          cfuse = {
-            cmd = { "cfuse" },
-          },
-        },
+          dsh = {
+            command = { "dsh-tui" }
+          }
+        }
       },
+    },
+    keys = {
+      { "<leader>ar", function() require("aviary").hawk.show() end, mode = "n", desc = "Aviary Review" },
+      { "<leader>sf", function() require("aviary").weaver.files() end, mode = "n", desc = "Send files" },
+      { "<leader>sb", function() require("aviary").weaver.buffers() end, mode = "n", desc = "Send buffers" },
+      { "<leader>sp", function() require("aviary").weaver.prompt() end, mode = {"n", "v"}, desc = "Send prompts" },
+      { "<c-,>", function() require("aviary").pigeon.pick() end, mode = "n", desc = "Aviary switch" },
+      { "<c-.>", function() require("aviary").pigeon.show() end, mode = "n", desc = "Aviary toggle" },
+      { "<leader>aS", function() require("aviary").pigeon.status() end, mode = "n", desc = "Aviary status" },
     },
   },
 }

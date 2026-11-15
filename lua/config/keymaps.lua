@@ -88,7 +88,7 @@ pcall(vim.keymap.del, { "n" }, "<leader>-") --Split Window Below
 pcall(vim.keymap.del, { "n" }, "<leader>|") --Split Window Right
 pcall(vim.keymap.del, { "n" }, "<leader>wd") --Delete Window
 pcall(vim.keymap.del, { "n" }, "<leader>wm") --Toggle Zoom Mode
-pcall(vim.keymap.del, { "n" }, "<leader>uZ") --Toggle Zoom Mode
+-- pcall(vim.keymap.del, { "n" }, "<leader>uZ") --Toggle Zoom Mode
 -- pcall(vim.keymap.del, {"n"}, "<leader>uz") --Toggle Zen Mode
 pcall(vim.keymap.del, { "n" }, "<leader><tab>l") --Last Tab
 pcall(vim.keymap.del, { "n" }, "<leader><tab>o") --Close Other Tabs
@@ -147,7 +147,7 @@ vim.keymap.set("n", "<A-->", "<C-w>_<C-w>|", { desc = "Maximize Current window" 
 vim.keymap.set("n", "<A-=>", "<C-w>=", { desc = "Equally high and wide" })
 -- stylua: ignore end
 
-vim.keymap.set("n", "<leader>;i", function()
+vim.keymap.set("n", "<leader>li", function()
   local options = { 2, 4, 8 }
   vim.ui.select(options, {
     prompt = "Select an indentation: ",

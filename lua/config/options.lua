@@ -9,4 +9,4 @@ vim.opt.showtabline = 0
 vim.opt.expandtab = true
 -- vim.g.lazyvim_debug_set_default = true
 
-vim.lsp.set_log_level("OFF")
+vim.lsp.log.set_level("OFF")

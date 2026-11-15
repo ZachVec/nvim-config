@@ -296,7 +296,7 @@ return {
           { "<leader>f", group = "find" },
           { "<leader>g", group = "git" },
           { "<leader>/", group = "grep", icon = " " },
-          { "<leader>;", group = "list", icon = " " },
+          { "<leader>l", group = "list", icon = " " },
           { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
           { "<leader>e", group = "explorer", icon = { icon = "󰖟 ", color = "cyan" } },
           { "[", group = "prev" },
@@ -320,5 +320,20 @@ return {
         json = { "treesitter" },
       },
     },
+  },
+
+  {
+    "mrjones2014/smart-splits.nvim",
+    dependencies = { "smart-splits-nvim/backend-tmux" },
+    opts = {
+      mux = { backend = "smart-splits-backend-tmux" },
+    },
+    keys = {
+      { "<c-h>", "<cmd>lua require('smart-splits').move_cursor_left()<cr>", mode = "n", desc = "Go to left window" },
+      { "<c-j>", "<cmd>lua require('smart-splits').move_cursor_down()<cr>", mode = "n", desc = "Go to lower window" },
+      { "<c-k>", "<cmd>lua require('smart-splits').move_cursor_up()<cr>", mode = "n", desc = "Go to upper window" },
+      { "<c-l>", "<cmd>lua require('smart-splits').move_cursor_right()<cr>", mode = "n", desc = "Go to right window" },
+    },
+    lazy = false,
   },
 }
