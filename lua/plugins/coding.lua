@@ -57,6 +57,51 @@ return {
         },
         view = { width = 1.0, height = 1.0, border = "rounded" },
       },
+      --- @type aviary.hawk.config.Options
+      hawk = {
+        keymaps = {
+          pick_revision = { "R" },
+        },
+        actions = {
+          pick_revision = function(tab)
+            local row, lnum = tab:current()
+            if row.kind ~= "meta" then
+              return
+            end
+            if row.input.kind ~= "revision" then
+              return
+            end
+            local root = vim.fn.shellescape(row.input.root)
+            local cmd = table.concat({
+              "echo 'HEAD (current)'",
+              "git -C " .. root .. " for-each-ref --format='%(refname:short) (branch)' refs/heads",
+              "git -C " .. root .. " for-each-ref --format='%(refname:short) (remote)' refs/remotes",
+              "git --no-pager -C " .. root .. " log -n 50 --format='%H (%h %s)'",
+            }, "\n")
+            require("fzf-lua").fzf_exec(cmd, {
+              prompt = "Revision> ",
+              fzf_opts = { ["--no-multi"] = true },
+              actions = {
+                ["enter"] = {
+                  fn = function(selected)
+                    if not selected[1] then
+                      return
+                    end
+                    if not vim.api.nvim_buf_is_valid(tab.bufnr) then
+                      return
+                    end
+                    local revision = selected[1]:match("^%S+")
+                    if revision then
+                      row:edit(revision)
+                      tab:render(lnum - 1, lnum)
+                    end
+                  end,
+                },
+              },
+            })
+          end,
+        },
+      },
     },
     keys = {
       { "<leader>ar", function() require("aviary").hawk.show() end, mode = "n", desc = "Aviary hawk" },
