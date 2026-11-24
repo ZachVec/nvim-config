@@ -38,6 +38,34 @@ return {
           end,
           stopinsert = function ()
             vim.cmd("stopinsert")
+          end,
+          files = function(current)
+            local agent = current()
+            require("fzf-lua").files({
+              actions = {
+                ["enter"] = {
+                  fn = function(selected, opts)
+                    if not selected[1] then
+                      return
+                    end
+                    local paths = {}
+                    for _, raw in ipairs(selected) do
+                      local path = require("fzf-lua.path").entry_to_file(raw, opts).path
+                      if path and path ~= "" then
+                        paths[#paths + 1] = path
+                      end
+                    end
+                    if #paths > 0 then
+                      local texts = {}
+                      for _, path in ipairs(paths) do
+                        texts[#texts + 1] = agent:eval({ path = path })
+                      end
+                      agent:send(table.concat(texts, "\n"))
+                    end
+                  end,
+                },
+              },
+            })
           end
         },
         keymaps = {
@@ -45,11 +73,13 @@ return {
           ctrl_slash = { "<C-/>", "<C-_>" },
           stopinsert = { "<C-q>" },
           prompt = { "<C-p>" },
-          pick = { "<c-,>" }
+          pick = { "<c-,>" },
+          files = { "<A-f>" },
+          buffers = { "<A-b>" },
         },
         tools = {
           claude = {
-            command = { "claude", "--allow-dangerously-skip-permissions" }
+            command = { "claude", "--allow-dangerously-skip-permissions", "--dangerously-skip-permissions" }
           },
           dsh = {
             command = { "dsh-tui" }
@@ -60,15 +90,51 @@ return {
       --- @type aviary.hawk.config.Options
       hawk = {
         keymaps = {
-          pick_revision = { "R" },
+          edit = { "i" },
+          hawk = { "<CR>" },
         },
         actions = {
-          pick_revision = function(tab)
+          edit = function(tab)
             local row, lnum = tab:current()
             if row.kind ~= "meta" then
               return
             end
-            if row.input.kind ~= "revision" then
+            ---@param value? string
+            local function confirm(value)
+              if value ~= nil then
+                row:edit(value)
+                tab:render(lnum - 1, lnum)
+              end
+            end
+            if row.input.kind == "choice" then
+              vim.ui.select(row.input.choices, {
+                format_item = function(item)
+                  return item == row.value and (item .. " [current]") or item
+                end,
+              }, confirm)
+            else
+              vim.ui.input({ default = row.value }, confirm)
+            end
+          end,
+          hawk = function(tab)
+            local row, lnum = tab:current()
+            if row.kind == "diff" then
+              row:jump(tab)
+              return
+            end
+            if row.input.kind == "choice" then
+              ---@param value? string
+              local function confirm(value)
+                if value ~= nil then
+                  row:edit(value)
+                  tab:render(lnum - 1, lnum)
+                end
+              end
+              vim.ui.select(row.input.choices, {
+                format_item = function(item)
+                  return item == row.value and (item .. " [current]") or item
+                end,
+              }, confirm)
               return
             end
             local root = vim.fn.shellescape(row.input.root)
