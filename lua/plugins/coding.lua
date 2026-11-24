@@ -72,7 +72,7 @@ return {
           ctrl_slash = { "<C-/>", "<C-_>" },
           stopinsert = { "<C-q>" },
           pick = { "<C-,>" },
-          prompt = { "<C-s>p" },
+          prompt = { "<C-s><C-p>" },
           files = { "<C-s><C-f>" },
           buffers = { "<C-s><C-b>" },
         },
