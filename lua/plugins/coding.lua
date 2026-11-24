@@ -72,10 +72,10 @@ return {
           newline = { "<S-CR>" },
           ctrl_slash = { "<C-/>", "<C-_>" },
           stopinsert = { "<C-q>" },
-          prompt = { "<C-p>" },
-          pick = { "<c-,>" },
-          files = { "<A-f>" },
-          buffers = { "<A-b>" },
+          prompt = { "<C-s>p" },
+          pick = { "<C-s>l" },
+          files = { "<C-s>f" },
+          buffers = { "<C-s>b" },
         },
         tools = {
           claude = {
