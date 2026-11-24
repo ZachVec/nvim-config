@@ -24,7 +24,6 @@ return {
 
   {
     "ZachVec/aviary.nvim",
-    main = "aviary",
     opts = {
       --- @type aviary.pigeon.ConfigOverrides
       pigeon = {
@@ -72,18 +71,10 @@ return {
           newline = { "<S-CR>" },
           ctrl_slash = { "<C-/>", "<C-_>" },
           stopinsert = { "<C-q>" },
+          pick = { "<C-,>" },
           prompt = { "<C-s>p" },
-          pick = { "<C-s>l" },
-          files = { "<C-s>f" },
-          buffers = { "<C-s>b" },
-        },
-        tools = {
-          claude = {
-            command = { "claude", "--allow-dangerously-skip-permissions", "--dangerously-skip-permissions" }
-          },
-          dsh = {
-            command = { "dsh-tui" }
-          }
+          files = { "<C-s><C-f>" },
+          buffers = { "<C-s><C-b>" },
         },
         view = { width = 1.0, height = 1.0, border = "rounded" },
       },
