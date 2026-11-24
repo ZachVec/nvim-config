@@ -1,0 +1,4 @@
+# Machine-local plugin overrides. lazy.nvim imports every module under
+# lua/plugins/, so this file is loaded locally but never belongs in the
+# shared config.
+/lua/plugins/local.lua
