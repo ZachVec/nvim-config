@@ -161,8 +161,8 @@ return {
       },
     },
     keys = {
-      { "<leader>ar", function() require("aviary").hawk.show() end, mode = "n", desc = "Aviary hawk" },
-      { "<c-.>", function() require("aviary").pigeon.show() end, mode = { "n", "x" }, desc = "Aviary pigeon" },
+      { "<leader>gr", function() require("aviary").hawk.show() end, mode = "n", desc = "Review" },
+      { "<c-.>", function() require("aviary").pigeon.show() end, mode = { "n", "x" }, desc = "Open agent terminal" },
     },
   },
 }

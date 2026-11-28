@@ -249,9 +249,6 @@ return {
             gs.nav_hunk("prev")
           end
         end, "Prev Hunk")
-        map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
-        map("n", "<leader>gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-        map("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
         map("n", "<leader>gp", gs.preview_hunk_inline, "Preview Hunk")
         map("n", "<leader>gb", function()
           gs.blame_line({ full = true })
